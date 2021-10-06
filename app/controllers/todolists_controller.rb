@@ -6,10 +6,18 @@ class TodolistsController < ApplicationController
   def create
     #1.データを新規登録するためのインスタンス作成
     list = List.new(list_params)
-    #2.データをデータベースに保存するためのsaveメゾット実行
     list.save
-    #トップ画面へリダイレクト
-    redirect_to '/top'
+    #詳細画面へリダイレクト
+    redirect_to todolist_path(list.id)
+
+  end
+
+  def index
+    @lists  = List.all
+  end
+
+  def show
+    @list = List.find(params[:id])
   end
 
   private
